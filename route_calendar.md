@@ -33,5 +33,6 @@ The following customers are missing from the traffic routes:
   - *Reason for Omission:* C048 is located far from the depot (~24 km, requiring a 28-min one-way trip) and its only available delivery days (Monday and Thursday) are the two busiest days of the week (53 and 50 scheduled stops respectively). Detouring to serve C048 would cause subsequent time-window violations for multiple other customers.
 - **C083** (Coordinates: 19.5498, -17.1281 | Demand: 1.3)
   - *Time Windows:* Thursday (18:30–21:30), Friday (18:30–21:30)
-  - *Reason for Omission:* C083 only permits evening deliveries starting at 06:30 PM. However, the shipper completes all other deliveries and returns to the central depot much earlier (05:10 PM on Thursday and 01:40 PM on Friday). Serving C083 would force the shipper to remain idle for hours, violating the waiting time optimization limits.
+  - *Reason for Omission:* C083's window (18:30–21:30) overlaps with the dense evening cluster at the end of both Thursday and Friday routes. The shipper packs deliveries tightly all the way to the 21:30 deadline (C270 ends at 21:38 on Thursday; C105 ends at 21:34 on Friday). Inserting C083 — located 26 km from the depot — at any of the 51 Thursday and 28 Friday route positions was tested exhaustively and found infeasible: every candidate insertion pushes at least one neighbouring customer past its own 21:30 deadline.
+
 
