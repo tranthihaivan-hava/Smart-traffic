@@ -196,11 +196,12 @@ labels  = [f'{DAY_NAMES[d]}\n{day_counts[d]}' for d in range(1, 8)] + ['Unserved
 colors  = [DAY_COLORS[d] for d in range(1, 8)] + ['#555555']
 explode = [0.03]*7 + [0.12]
 
-wedges, texts, autotexts = ax.pie(
+pie_result: tuple[list, list, list] = ax.pie(  # type: ignore[assignment]
     sizes, labels=labels, colors=colors, explode=explode,
     autopct='%1.1f%%', startangle=140, pctdistance=0.78,
     textprops={'fontsize': 9.5}
 )
+wedges, texts, autotexts = pie_result
 for at in autotexts:
     at.set_fontsize(8.5)
     at.set_color('white')
