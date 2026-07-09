@@ -35,14 +35,15 @@ with open(f'{BASE}/locations.csv', newline='', encoding='utf-8') as f:
         locs[row['location_id']] = (float(row['x_km']), float(row['y_km']))
         svc[row['location_id']]  = int(row['service_time'])
 
+# STRICT TIME WINDOW APPROACH – Optuna Optimized Routes
 routes = {
-    1: 'C228,C175,C252,C106,C184,C288,C057,C056,C171,C072,C251,C071,C112,C214,C061,C017,C055,C224,C033,C148,C284,C249,C218,C294,C053,C182,C134,C276,C122,C194,C205,C204,C297,C088,C233,C064,C012,C058,C065,C045,C040,C237,C019,C286,C290,C051,C031,C257,C114,C085,C155,C280,C009'.split(','),
-    2: 'C008,C110,C054,C179,C107,C068,C005,C152,C216,C135,C231,C059,C030,C217,C229,C291,C069,C274,C161,C300,C176,C100,C203,C187,C269,C198,C073,C075,C271,C126,C032,C256,C238,C260,C160,C151,C039,C006,C025,C255,C063,C236,C001,C197,C120,C163,C127,C157,C168,C062,C090,C108,C131,C103,C132,C278,C050,C195,C177,C097,C028'.split(','),
-    3: 'C201,C258,C186,C015,C245,C141,C041,C034,C003,C086,C013,C102,C078,C239,C038,C154,C167,C192,C129,C247,C264,C162,C060,C084,C115,C265,C139,C299,C208,C125,C014,C082,C244,C273,C099,C281,C211,C036'.split(','),
-    4: 'C140,C016,C227,C242,C215,C241,C052,C101,C092,C232,C285,C124,C046,C275,C223,C283,C166,C158,C081,C243,C150,C144,C044,C246,C266,C143,C206,C174,C096,C221,C010,C022,C089,C259,C191,C091,C007,C248,C235,C095,C298,C136,C165,C289,C149,C067,C111,C267,C210,C270'.split(','),
-    5: 'C024,C002,C147,C156,C117,C296,C130,C230,C077,C119,C098,C183,C070,C268,C295,C180,C202,C137,C128,C076,C250,C287,C023,C170,C146,C181,C105'.split(','),
-    6: 'C169,C145,C209,C188,C049,C109,C037,C153,C138,C178,C066,C253,C207,C018,C123,C080,C172,C282,C093,C199,C254,C225,C004,C164,C047,C263,C185,C159,C087,C027,C116,C035,C094,C272,C026,C043,C226,C213,C222,C074,C220,C121'.split(','),
-    7: 'C011,C133,C212,C029,C293,C193,C262,C200,C079,C196,C240,C279,C020,C021,C292,C118,C261,C219,C104,C142,C042,C277,C113,C234,C190,C173,C189'.split(','),
+    1: 'C175,C228,C247,C110,C174,C206,C107,C179,C005,C143,C119,C144,C150,C135,C216,C152,C243,C291,C265,C158,C166,C178,C063,C154,C167,C187,C129,C236,C059,C081,C030,C115,C197,C180,C261,C139,C299,C120,C142,C014,C049,C062,C234,C270,C188,C108,C125,C210,C202,C132,C209,C267'.split(','),
+    2: 'C269,C231,C162,C229,C274,C176,C203,C198,C008,C148,C245,C294,C122,C276,C141,C284,C015,C033,C017,C003,C112,C013,C102,C073,C255,C025,C161,C006,C021,C183,C215,C256,C260,C160,C151,C032,C126,C271,C075,C300,C039,C238,C295,C165,C136,C123,C097,C253,C028,C278,C169,C051,C181,C211,C040,C170,C114,C085,C280'.split(','),
+    3: 'C288,C056,C061,C086,C224,C218,C053,C182,C134,C034,C297,C041,C186,C258,C252,C106,C184,C201,C264,C044,C060,C084,C068,C192,C217,C069,C100,C078,C171,C071,C204,C205,C194,C146,C237,C023,C287,C257,C031,C250,C009,C011,C116,C027,C262,C263,C200,C036,C189'.split(','),
+    4: 'C140,C057,C055,C214,C251,C072,C016,C227,C242,C052,C241,C232,C285,C124,C046,C275,C223,C283,C096,C054,C246,C077,C022,C010,C221,C092,C101,C239,C038,C067,C111,C149,C289,C298,C095,C235,C248,C007,C091,C089,C168,C099,C281'.split(','),
+    5: 'C230,C130,C296,C117,C156,C147,C002,C249,C024,C070,C098,C163,C001,C190,C131,C137,C173,C128,C083,C076,C233,C272'.split(','),
+    6: 'C145,C207,C018,C199,C254,C225,C004,C164,C282,C093,C172,C191,C080,C259,C066,C138,C177,C050,C195,C103,C090,C153,C208,C037,C127,C157,C109,C266,C220,C121,C074,C213,C222,C159,C185,C047,C087,C226,C065,C043,C026,C155,C094,C035,C290,C105'.split(','),
+    7: 'C113,C082,C244,C273,C277,C042,C104,C219,C118,C292,C020,C279,C240,C196,C079,C193,C012,C293,C064,C029,C212,C133,C088,C058,C045,C019,C286'.split(','),
 }
 unserved = ['C048', 'C083']
 day_counts = {d: len(r) for d, r in routes.items()}
@@ -75,7 +76,10 @@ for cid, (x, y) in locs.items():
         ax.scatter(x, y, c='#333333', s=55, marker='x', linewidths=1.8, zorder=4)
     else:
         day = cust_day.get(cid, 0)
-        ax.scatter(x, y, c=DAY_COLORS[day], s=28, alpha=0.85, zorder=3, edgecolors='white', linewidths=0.3)
+        if day == 0:
+            ax.scatter(x, y, c='#333333', s=55, marker='x', linewidths=1.8, zorder=4)
+        else:
+            ax.scatter(x, y, c=DAY_COLORS[day], s=28, alpha=0.85, zorder=3, edgecolors='white', linewidths=0.3)
 
 ax.scatter(*depot, c='#FFD700', s=280, marker='*', zorder=6, edgecolors='#333', linewidths=0.8, label='Depot')
 
@@ -109,7 +113,7 @@ for bar, val in zip(bars, counts):
 ax.axhline(sum(counts)/7, color='#888', linestyle='--', linewidth=1.2, label=f'Average ({sum(counts)/7:.0f})')
 ax.legend(fontsize=10, framealpha=0.9)
 ax.set_ylim(0, max(counts) + 10)
-ax.set_title('Number of Customers Served per Day  (Total: 298 / 300)', fontsize=13, fontweight='bold', pad=10)
+ax.set_title('Number of Customers Served per Day  (Total: 298 / 300)  [Strict Windows]', fontsize=13, fontweight='bold', pad=10)
 ax.set_ylabel('Customers Served', fontsize=11)
 ax.grid(axis='y', linestyle='--', alpha=0.35, zorder=0)
 plt.tight_layout()
@@ -120,9 +124,10 @@ plt.close()
 # FIG 3 — Method Comparison
 # -------------------------------------------------------------
 print("Generating Fig 3: Method Comparison...")
+# STRICT TIME WINDOW comparison values
 methods       = ['Nearest\nNeighbor', 'Earliest\nDeadline First', 'Proposed\n(Default w)', 'Proposed\n(Optuna w)']
-unserved_vals = [102, 13, 7, 2]
-loss_vals     = [1021581, 130420, 70810, 23581]
+unserved_vals = [115, 15, 22, 2]
+loss_vals     = [1153772, 153684, 223616, 23565]
 colors_bar    = ['#E63946', '#F4A261', '#457B9D', '#06D6A0']
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5))
@@ -135,7 +140,7 @@ for b, v in zip(bars1, unserved_vals):
     ax1.text(b.get_x()+b.get_width()/2, b.get_height()+0.8, str(v), ha='center', va='bottom', fontweight='bold', fontsize=12)
 ax1.set_title('Unserved Customers', fontsize=12, fontweight='bold', pad=8)
 ax1.set_ylabel('Count', fontsize=10)
-ax1.set_ylim(0, 115)
+ax1.set_ylim(0, 130)
 ax1.grid(axis='y', linestyle='--', alpha=0.35, zorder=0)
 
 bars2 = ax2.bar(methods, loss_vals, color=colors_bar, edgecolor='white', linewidth=1, zorder=3)
@@ -146,7 +151,7 @@ ax2.set_title('Objective Loss Score  (log scale)', fontsize=12, fontweight='bold
 ax2.set_ylabel('Loss Score', fontsize=10)
 ax2.grid(axis='y', linestyle='--', alpha=0.35, zorder=0)
 
-fig.suptitle('Algorithm Comparison: 4 Methods', fontsize=14, fontweight='bold', y=1.02)
+fig.suptitle('Algorithm Comparison: 4 Methods  [Strict Windows]', fontsize=14, fontweight='bold', y=1.02)
 plt.tight_layout()
 plt.savefig('visualize/fig3_comparison.png', dpi=180, bbox_inches='tight')
 plt.close()
@@ -156,7 +161,8 @@ plt.close()
 # -------------------------------------------------------------
 print("Generating Fig 4: Shift Timeline...")
 start_min  = 480   # 08:00
-return_min = {1:1311, 2:1308.6, 3:1290.6, 4:1315.7, 5:1308, 6:1017.3, 7:867}
+# STRICT TIME WINDOW return times
+return_min = {1:1281.0, 2:1272.2, 3:1281.3, 4:1243.6, 5:1251.5, 6:1275.2, 7:1271.3}
 
 def fmt(m):
     return f'{int(m)//60:02d}:{int(m)%60:02d}'
@@ -177,7 +183,7 @@ ax.set_xticks(range(480, 1380, 60))
 ax.set_xticklabels([fmt(m) for m in range(480, 1380, 60)], fontsize=8, rotation=45)
 ax.set_xlim(420, 1380)
 ax.set_xlabel('Time of Day', fontsize=10)
-ax.set_title('Daily Shipper Shift Timeline  (Departure → Return to Depot)', fontsize=13, fontweight='bold', pad=10)
+ax.set_title('Daily Shipper Shift Timeline  [Strict Windows]  (Departure → Return to Depot)', fontsize=13, fontweight='bold', pad=10)
 ax.grid(axis='x', linestyle='--', alpha=0.3, zorder=0)
 plt.tight_layout()
 plt.savefig('visualize/fig4_shift_timeline.png', dpi=180, bbox_inches='tight')
@@ -207,7 +213,7 @@ for at in autotexts:
     at.set_color('white')
     at.set_fontweight('bold')
 
-ax.set_title('Customer Distribution Across the Week\n(Total: 300 customers)', fontsize=13, fontweight='bold', pad=14)
+ax.set_title('Customer Distribution Across the Week  [Strict Windows]\n(Total: 300 customers)', fontsize=13, fontweight='bold', pad=14)
 plt.tight_layout()
 plt.savefig('visualize/fig5_distribution_pie.png', dpi=180, bbox_inches='tight')
 plt.close()

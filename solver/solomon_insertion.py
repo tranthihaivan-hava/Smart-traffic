@@ -75,10 +75,12 @@ class SolomonInsertion:
             windows = cust.get_windows_for_day(day)
             
             # Find a valid window we can satisfy
+            # Strict rule: entire service (start + duration) must finish within the window
             valid_window = None
-            # Sort windows by start time
             for w in sorted(windows, key=lambda x: x.start_time):
-                if arrival <= w.end_time:
+                service_start_cand = max(arrival, w.start_time)
+                service_end_cand = service_start_cand + cust.service_duration
+                if service_end_cand <= w.end_time:
                     valid_window = w
                     break
             

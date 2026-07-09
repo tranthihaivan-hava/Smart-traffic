@@ -27,10 +27,17 @@ def main():
     
     # Initialize Solver
     solver = GreedySolver(problem)
-    default_weights = get_default_weights()
+    # Use optuna optimized weights
+    from config.weights_config import WeightVector
+    optimized_weights = WeightVector(
+        distance=0.04937285751085062,
+        urgency=0.7116648907564567,
+        waiting=0.48155705278840216,
+        delivery_risk=0.9061216371003185
+    )
     
-    print(f"\nRunning Solomon Greedy Solver with weights: {default_weights}...")
-    state = solver.solve_complete_problem(default_weights)
+    print(f"\nRunning Solomon Greedy Solver with weights: {optimized_weights}...")
+    state = solver.solve_complete_problem(optimized_weights)
     
     # Evaluate Route Quality
     evaluator = ObjectiveFunction()

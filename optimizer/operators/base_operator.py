@@ -38,7 +38,10 @@ class BaseOperator(ABC):
             windows = cust.get_windows_for_day(day)
             valid_window = None
             for w in sorted(windows, key=lambda x: x.start_time):
-                if arrival <= w.end_time:
+                # Strict rule: entire service must finish within the window
+                service_start_cand = max(arrival, w.start_time)
+                service_end_cand = service_start_cand + cust.service_duration
+                if service_end_cand <= w.end_time:
                     valid_window = w
                     break
             if valid_window is None:
