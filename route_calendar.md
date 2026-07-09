@@ -3,13 +3,14 @@
 
 ## Shipper Shift Times
 The shipper departs from the central `DEPOT` at **08:00 AM** (minute 480.0 when windows open). The shift end time represents the vehicle's return to the central depot after completing all daily deliveries:
-- **Monday:** 08:00 AM – 03:10 PM (Return time: 910.0 mins)
-- **Tuesday:** 08:00 AM – 05:30 PM (Return time: 1050.0 mins)
-- **Wednesday:** 08:00 AM – 02:10 PM (Return time: 850.0 mins)
-- **Thursday:** 08:00 AM – 05:10 PM (Return time: 1030.0 mins)
-- **Friday:** 08:00 AM – 01:40 PM (Return time: 820.0 mins)
+- **Monday:** 08:00 AM – 09:51 PM (Return time: 1311.0 mins)
+- **Tuesday:** 08:00 AM – 09:48 PM (Return time: 1308.6 mins)
+- **Wednesday:** 08:00 AM – 09:30 PM (Return time: 1290.6 mins)
+- **Thursday:** 08:00 AM – 09:55 PM (Return time: 1315.7 mins)
+- **Friday:** 08:00 AM – 09:48 PM (Return time: 1308.0 mins)
 - **Saturday:** 08:00 AM – 04:57 PM (Return time: 1017.3 mins)
 - **Sunday:** 08:00 AM – 02:27 PM (Return time: 867.0 mins)
+
 
 ## Route Calendar
 | Day | Served Customers Count | Route (Sequence of Visits) |
