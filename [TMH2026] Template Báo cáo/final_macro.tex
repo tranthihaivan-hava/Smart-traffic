@@ -1,0 +1,93 @@
+\documentclass[12pt,a4paper]{article} % book (viết sách) % beamer (thuyết trình)
+
+
+
+% Nạp các package (thư viện) cần thiết 
+% preamble
+
+\usepackage[utf8]{vietnam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{cite} 
+\usepackage{hyperref}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage{color} 
+\usepackage{amsmath, amsfonts, amssymb, amsxtra, amsthm}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{verbatim}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{longtable}
+\usepackage{indentfirst}
+\usepackage{appendix}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\setlength{\parindent}{0cm}
+\usepackage{biblatex}
+\addbibresource{ref.bib}
+
+
+% Định nghĩa màu mới (rgb)
+\definecolor{number}{rgb}{0.5,0,0,75}
+\definecolor{comment}{rgb}{0,0,0.95}
+\definecolor{keyword}{rgb}{0,0.65,0}
+
+
+
+
+% Định nghĩa môi trường mới
+\theoremstyle{definition}
+\newtheorem{dn}{Định nghĩa}%[section]
+\newtheorem{dly}[dn]{Định lý}
+\newtheorem{md}[dn]{Mệnh đề}
+\newtheorem{hq}[dn]{Hệ quả}
+\newtheorem{vd}[dn]{Ví dụ}
+\newtheorem{gt}[dn]{Giả thuyết}
+\newtheorem{bai}{Bài}
+\newtheorem{bd}{Bổ đề}
+
+\theoremstyle{remark}
+%\newtheorem{bt}{Bài tập}[section]
+\newtheorem*{rmk}{Chú ý}
+%\newtheorem*{nota}{Quy ước}
+%\newtheorem*{fact}{Tính chất}
+\newtheorem*{lgiai}{Lời giải}
+
+\numberwithin{equation}{section}
+\newenvironment{fold}{}{\hskip2cm \vskip1,6cm}
+\makeatletter
+\newcommand{\mytitle}[2]{
+	\begin{center}
+		{\Large\bfseries #1}
+		%add muc luc
+	\end{center}
+	% \addcontentsline{toc}{subsection}{\textbf{#2:} {#1}}
+}
+\nobreak
+\newcommand{\myauthor}[1]{
+	\begin{center}
+		{\bfseries #1}
+\end{center}}
+\nobreak
+\newcommand{\address}[1]{
+	\begin{center}
+		{ #1}
+	\end{center}}
+ \nobreak
+	\renewcommand{\abstractname}{Tóm tắt nội dung}
+	% \renewcommand{\refname}{\small \centerline{References}}
+\newcommand{\email}[1]{\texttt{#1}
+}
+
+\makeatother

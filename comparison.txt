@@ -1,0 +1,45 @@
+SMART-TRAFFIC SYSTEM COMPARISON REPORT
+======================================
+
+Algorithm: Nearest Neighbor Baseline
+  - Failed Deliveries: 102
+  - Total Distance: 649.24 km
+  - Total Waiting Time: 6239.31 minutes
+  - Loss Score: 1023768.8913
+
+Algorithm: Earliest Deadline First
+  - Failed Deliveries: 13
+  - Total Distance: 1340.71 km
+  - Total Waiting Time: 4731.05 minutes
+  - Loss Score: 133706.2301
+
+Algorithm: Proposed Heuristic (Default Weights)
+  - Failed Deliveries: 7
+  - Total Distance: 1113.34 km
+  - Total Waiting Time: 4828.37 minutes
+  - Loss Score: 73527.5268
+
+Algorithm: Proposed Heuristic (Optuna Optimized)
+  - Failed Deliveries: 2
+  - Total Distance: 1195.58 km
+  - Total Waiting Time: 4771.78 minutes
+  - Loss Score: 23581.4760
+
+
+====================================================================================
+                                   COMPARISON SUMMARY                               
+====================================================================================
+Algorithm / Policy                       | Unserved | Distance (km)   | Wait Time (m)   | Loss Score  
+--------------------------------------------------------------------------------------------
+Nearest Neighbor Baseline                | 102      |          649.24 |         6239.31 | 1023768.8913
+Earliest Deadline First                  | 13       |         1340.71 |         4731.05 |  133706.2301
+Proposed Heuristic (Default Weights)     | 7        |         1113.34 |         4828.37 |   73527.5268
+Proposed Heuristic (Optuna Optimized)    | 2        |         1195.58 |         4771.78 |   23581.4760
+====================================================================================
+
+Optimal Weights Discovered:
+  - Distance Weight: 0.5628213768566174
+  - Urgency Weight: 0.3237601041949437
+  - Waiting Time Weight: 0.8143080944591926
+  - Delivery Risk Weight: 0.5428500422676648
+

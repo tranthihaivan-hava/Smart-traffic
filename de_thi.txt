@@ -1,0 +1,57 @@
+ĐỀ THI VÒNGSƠLOẠI- BẢNGB 1
+CUỘC THITOÁNMÔ HÌNH2026
+Ứng dụng Toán học trong thiết kế lộ trình giao hàng tối ưu
+Mô Tả
+Một công ty công nghệ đang phát triển một ứng dụng hỗ trợ người giao hàng lập lịch giao hàng
+trong tuần. Mỗi buổi sáng thứ hai đầu tuần, ứng dụng nhận danh sách các đơn hàng cần giao từ
+một kho trung tâm đến nhiều khách hàng trong thành phố. Trong phiên bản thử nghiệm này, công
+ty chỉ xét trường hợp cómột người giao hàng sử dụng một xe duy nhất.
+Mỗi ngày, người giao hàng xuất phát từ kho trung tâm, giao một số đơn hàng, rồi quay lại kho sau
+khi kết thúc lịch giao hàng trong ngày. Xe có tải trọng đủ lớn để chở toàn bộ các đơn hàng, nên
+đội thi không cần kiểm tra điều kiện quá tải (tuy nhiên, đội thi có thể phát triển mô hình của mình
+để tính đến tải trọng giới hạn của xe). Ngoài ra, để đảm bảo an toàn khi lưu thông trong đô thị, xe
+không được đi quá tốc độ50km/h.
+Khó khăn chính của bài toán nằm ở thời gian giao hàng. Mỗi khách hàng có thể đưa ra nhiều
+khoảng thời gian có thể nhận hàng trong ngày, chẳng hạn buổi sáng, cuối giờ chiều hoặc buổi tối.
+Người giao hàng có thể giao hàng trong bất kỳ khoảng thời gian nào mà khách hàng cho phép.
+Nếu người giao hàng đến sớm hơn một khoảng thời gian hợp lệ, người giao hàng phải chờ đến khi
+khách hàng sẵn sàng nhận hàng. Nếu có quá nhiều đơn cần phải giao đến trong cùng một khung
+thời gian, người giao hàng có thể hẹn khách hàng giao vào ngày hôm sau hoặc các ngày sau đó,
+nhưng phải trong cùng một tuần, và trong khoảng thời gian khách hàng có thể nhận hàng. Nếu đến
+ngày cuối tuần (chủ nhật), người giao hàng vẫn còn đơn chưa giao, thì tất cả các đơn đó sẽ được
+tính làkhông hoàn thành.
+Công ty muốn đội thi thiết kế một tính năng mới cho ứng dụng:tự động đề xuất lịch giao hàng
+thông minh cho một người giao hàng. Tính năng này cần đưa ra thứ tự giao hàng, khung giờ giao
+dự kiến, các đơn nên giao trong ngày hiện tại và các đơn nên hẹn lại ngày hôm sau nếu cần.
+Yêu cầu
+1. Xây dựng thuật toán để tạo lịch giao hàng cho một người giao hàng trong nhiều ngày. Đội
+thi không bắt buộc phải chứng minh phương án là tối ưu, nhưng cần giải thích vì sao thuật
+toán phù hợp với bài toán và có khả năng chạy được trong một ứng dụng thực tế.
+2. Đề xuất cách đánh giá chất lượng của một lịch giao hàng và nêu rõ tiêu chí nào được ưu tiên
+hơn trong thiết kế của mình.
+1Bảng dành cho sinh viên đại học
+3. Để tiện cho việc thử nghiệm ứng dụng, công ty đã thu thập một bộ dữ liệu bao gồm tọa độ
+khách hàng và thời gian khách hàng có thể nhận hàng. Đội thi cần kiểm thử thuật toán của
+mình với bộ dữ liệu thử nghiệm đã cho, đồng thời so sánh tính năng đề xuất với ít nhất hai
+phương án cơ sở, chẳng hạn:
+•luôn giao đến khách hàng gần nhất;
+•luôn giao đơn có khung thời gian kết thúc sớm nhất;
+•hạn chế tối đa việc hẹn lại khách sang ngày hôm sau;
+Việc so sánh cần dựa trên các chỉ số định lượng, không chỉ dựa trên nhận xét cảm tính.
+Dữ liệu
+Bộ dữ liệu chính thức được cung cấp dưới dạng tệp nén, gồm các tệp sau:
+•locations.csv: thông tin về kho và các khách hàng, gồm mã địa điểm, tên địa điểm, tọa
+độ, lượng hàng cần giao. Đơn vị đo của các trục tọa độ trong tệp này là ki-lô-mét.
+•time_windows.csv: thông tin về các khoảng thời gian nhận hàng của từng khách hàng, gồm
+mã địa điểm, ngày trong tuần (1 = Thứ Hai, . . . , 7 = Chủ Nhật), thời gian bắt đầu và thời gian
+kết thúc (định dạng HH:MM theo giờ địa phương). Một khách hàng có thể có nhiều khoảng
+thời gian nhận hàng trong cùng một ngày.
+Một đơn hàng chỉ được giao một lần. Nếu một đơn chưa được giao trong ngày hiện tại, ứng
+dụng có thể chuyển đơn đó sang ngày hôm sau. Lưu ý rằng với mỗi ngày trong tuần, khoảng thời
+gian khách hàng có thể nhận hàng là khác nhau. Chẳng hạn vào cuối tuần, khách hàng có thể nhận
+đơn vào bất kì thời điểm nào trong ngày; trong khi đó vào các ngày trong tuần, khách hàng chỉ có
+thể nhận đơn vào những khoảng thời gian xác định, thậm chí có những ngày khách hàng không thể
+nhận hàng vì lý do bất khả kháng (xem thêm trong dữ liệu được cung cấp). Nếu đơn hàng không
+được giao vào khung giờ cho phép, đơn đó được coi là không hoàn thành.
+Đề thi gồm có 02 trang. Mọi thắc mắc vui lòng liên hệ qua fanpage Toán Mô Hình Hà Nội để
+được hỗ trợ nhanh nhất

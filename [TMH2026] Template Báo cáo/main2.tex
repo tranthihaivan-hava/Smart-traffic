@@ -1,0 +1,315 @@
+\documentclass[twoside,12pt]{article}
+\usepackage{subfigure}
+\usepackage[utf8]{vietnam}
+% \usepackage[left=2.50cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{fancybox,graphicx}
+\usepackage{mathrsfs}
+\usepackage{lipsum,lineno}
+\usepackage{amsfonts}
+\usepackage{mathptmx}
+\usepackage{fancyhdr}
+\usepackage{longtable,array}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{appendix}
+\usepackage{threeparttable} % For table footnotes
+\usepackage{booktabs}
+\newlength\mylength
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage[intlimits]{amsmath}
+\usepackage{array}
+\usepackage[unicode]{hyperref}
+% \usepackage{algorithm}
+% \usepackage{algorithmicx}
+\makeatletter
+% \renewcommand{\ALG@name}{Thuật toán}
+\makeatother
+\usepackage{algpseudocode}
+\usepackage{amsxtra,amssymb,latexsym,amscd,amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+% \usetikzlibrary{shapes.geometric}
+% \usetikzlibrary{positioning,automata}
+% \usepackage{scrextend}
+% \usepackage{longfbox}
+%Môi trường Lời giải
+%\newtheorem{theorem}{Định lý}[chapter]
+%\newtheorem{definition}{Định nghĩa}[chapter]
+%\newtheorem{example}{Ví dụ}[chapter]
+%\newtheorem{lemma}[theorem]{Bổ đề}
+%Tiêu đề
+% \newtheorem{pro}{Bài toán}
+% \newtheorem*{constr}{Ràng buộc}
+% \newtheorem*{calfunc}{Các hàm được thực thi}
+% \newtheorem*{Sol}{Giải thuật}
+% \newtheorem*{Anal}{Phân tích giải thuật}
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \lhead{}
+% \chead{}
+% \rhead{Nguyên lý Hệ Điều Hành}
+% \lfoot{}
+% \cfoot{\thepage}
+% \rfoot{}
+
+\paperheight=24cm
+\paperwidth=17cm
+\textwidth=13truecm
+\textheight=19,7truecm
+\topmargin=0cm
+\headsep=20truept
+\headheight=12pt
+\voffset=-0.75truecm
+\hoffset=-0.75cm
+\oddsidemargin=0.5cm
+\evensidemargin=0.5cm
+\footskip=30 pt
+\pagenumbering {arabic}
+\setcounter{page}{1}
+% \setcounter{chapter}{0}
+\addtocontents{toc}{\protect\vspace{20pt}}
+\setlength{\parindent}{0.5cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+% \renewcommand{\sectionmark}[1]{\markboth{\bfseries Chương \thechapter . \, #1}{}} % Chapter text font settings
+% \renewcommand{\sectionmark}[1]{\markright{\bfseries\thesection\hspace{5pt}#1}{}} % Section text font settings
+\fancyhead[LO,RE]{TMH \#\#\#\#\#}
+\fancyhead[RO,LE]{\textbf{Trang \thepage}}
+
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+
+
+% \renewcommand{\fboxrule}{0.3pt}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+\begin{titlepage}
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{logotmh.png}
+\end{figure}
+\vspace{24pt}
+
+\begin{center}
+	\textbf{{\Huge CUỘC THI}} \\[10pt]
+ \textbf{\LARGE TOÁN MÔ HÌNH 2025}\\[10pt]
+ \textbf{\LARGE VÒNG CHUNG KẾT}\\[10pt]
+ \textbf{ 20 - 22 tháng 8, 2025}
+\\[3.0cm]
+\begin{tabular}{rc}
+Mã đội thi:     & TMH \#\#\#\#\#\\
+Ngày thực hiện: & (DD/MM/YY)
+\end{tabular}   
+\end{center}
+
+
+\vspace{\fill}
+\end{titlepage}
+
+\begin{abstract}
+    Phần này không nên dài quá 01 trang. Trong phần này, các đội thi tóm tắt những ý chính của bài thi (mô hình toán học; công cụ toán học được các đội thi sử dụng; Tóm tắt ưu nhược điểm của mô hình; các hướng phát triển mô hình;...).  \\
+    \lipsum[2]\\
+\end{abstract}
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Giới thiệu}
+Lưu ý tất cả nội dung trong các mục này đều chỉ mang tính minh họa. \lipsum[4][1-3]
+\subsection{Tổng quan về bệnh ung thư}
+\lipsum[1]\\
+\lipsum[2]
+\subsection{Cơ chế gây bệnh ung thư}
+\lipsum[3]
+\section{Mô hình toán học}
+\subsection{Các giả định}
+\lipsum[2]
+\begin{itemize}
+    \item The penguin is a cylinder. \lipsum[9][1-3]
+
+    \item Friction is ignored. \lipsum[3][1-3]
+
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[5][1-3]
+\end{itemize}
+
+\subsection{Xây dựng mô hình}
+
+\lipsum[3][1-8]\\
+\begin{align}\label{equation_1}
+    \begin{split}
+        \begin{cases}
+            y_t - \Delta y + (y \cdot\nabla)y + \nabla p = f(x,t) \text{ in }Q:=\Omega \times (0;T);\\
+            \nabla \cdot y = 0 \text{ in }Q; \,y(0,t)=y_0(t) \text{ on }(0;T); \, y(x,t) = 0 \text{ on }\partial\Omega \times (0;T).
+        \end{cases}
+    \end{split}
+\end{align}
+
+The equation \eqref{equation_1} determined the velocity $y(x,t)$ and the scalar pressure $p(x,t)$ at each point in the domain $\Omega$. \lipsum[4]
+
+
+\section{Kết quả và mô phỏng}
+Use the table and tabular environments for basic tables --- see Tables~\ref{tab1} and \ref{tab2}, for example. Table \ref{tab1} is an sample figure including table footnotes. For more information, please see this help article on \href{https://www.overleaf.com/learn/latex/tables}{tables}. 
+
+\begin{table}[!ht]
+\caption{Sample table with footnotes\label{tab1}}
+\begin{threeparttable}
+\begin{tabular*}{\columnwidth}{@{\extracolsep\fill}llll@{\extracolsep\fill}}
+\toprule
+column 1 & column 2 & column 3 & column 4\\
+\midrule
+row 1 & data 1 & data 2 & data 3 \\
+row 2 & data 4 & data 5\tnote{1} & data 6 \\
+row 3 & data 7 & data 8 & data 9\tnote{2} \\
+\bottomrule
+\end{tabular*}
+\begin{tablenotes}
+\item Source: This is an example of table footnote. This is an example of table footnote. This is an example of table footnote. This is an example of table footnote. This is an example of table footnote.
+\item[1] Example of a first table footnote.
+\item[2] Example of a second table footnote.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\lipsum[4]
+\begin{table*}[!h]
+\caption{Example of a lengthy table which is set to full textwidth.\label{tab2}}
+\tabcolsep=0pt
+\begin{threeparttable}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc@{\extracolsep{\fill}}}
+\toprule
+& \multicolumn{3}{c}{Element 1\tnote{1}} & \multicolumn{3}{c}{Element 2\tnote{2}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Project & Energy & $\sigma_{\mathrm{calc}}$ & $\sigma_{\mathrm{expt}}$ & Energy & $\sigma_{\mathrm{calc}}$ & $\sigma_{\mathrm{expt}}$ \\
+\midrule
+Element 3 & 990 A & 1168 & $1547\pm12$ & 780 A & 1166 & $1239\pm100$ \\
+Element 4 & 500 A & 961 & $922\pm10$ & 900 A & 1268 & $1092\pm40$ \\
+\bottomrule
+\end{tabular*}
+\begin{tablenotes}
+\item Note: This is an example of table footnote this is an example of table footnote this is an example of table footnote this is an example of~table footnote this is an example of table footnote.
+\item[1] Example of a first table footnote.
+\item[2] Example of a second table footnote.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+As per display \LaTeX\ standards one has to use eps images for \verb+latex+ compilation and \verb+pdf/jpg/png+ images for
+\verb+pdflatex+ compilation. This is one of the major differences between \verb+latex+
+and \verb+pdflatex+. The images should be single-page documents. The command for inserting images
+for \verb+latex+ and \verb+pdflatex+ can be generalized. The package used to insert images in \verb+latex+ is the
+graphicx package. Figures can be inserted via the normal figure environment as shown in the below example:
+
+
+\begin{figure}[!h]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Image/fig_a.png}
+        \caption{Figure example}
+\end{figure}
+
+\lipsum[3][1-5]
+
+\section{Kết luận}
+\subsection{Ưu điểm của mô hình}
+\lipsum[4][1-7]
+
+\begin{enumerate}
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+\end{enumerate}
+
+\subsection{Nhược điểm của mô hình}
+\lipsum[4][1-7]
+
+\begin{enumerate}
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+\end{enumerate}
+\subsection{Hướng phát triển mô hình}
+\lipsum[4][1-7]
+
+\begin{enumerate}
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[4][1-3]
+\end{enumerate}
+
+\newpage
+\thispagestyle{empty}
+\begin{thebibliography}{99}
+\bibitem{1} D.~E. KNUTH   The \TeX{}book  the American
+Mathematical Society and Addison-Wesley
+Publishing Company , 1984-1986.
+\bibitem{2}Lamport, Leslie,  \LaTeX{}: `` A Document Preparation System '',
+Addison-Wesley Publishing Company, 1986.
+\bibitem{3}\url{https://www.latexstudio.net/}
+\end{thebibliography}
+\newpage
+
+\begin{appendices}
+    \section{First appendix}
+
+In addition, your report must include a letter to the Chief Financial Officer (CFO) of the Goodgrant Foundation, Mr. Alpha Chiang, that describes the optimal investment strategy, your modeling approach and major results, and a brief discussion of your proposed concept of a return-on-investment (ROI). This letter should be no more than two pages in length.
+
+Dear, Mr. Alpha Chiang
+
+\lipsum[1-2]
+
+\vspace{\parskip}
+
+Sincerely yours,
+
+Your friends
+\end{appendices}
+
+
+
+
+
+\end{document}
+
+
+

@@ -1,0 +1,112 @@
+\documentclass[twoside,12pt]{article}
+\usepackage{subfigure}
+\usepackage[utf8]{vietnam}
+% \usepackage[left=2.50cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{fancybox,graphicx}
+\usepackage{mathrsfs}
+\usepackage{lipsum,lineno}
+\usepackage{amsfonts}
+\usepackage{mathptmx}
+% \usepackage{abstract}
+\usepackage{fancyhdr}
+\usepackage{longtable,array}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{appendix}
+\usepackage{threeparttable} % For table footnotes
+\usepackage{booktabs}
+\newlength\mylength
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage[intlimits]{amsmath}
+\usepackage{array}
+\usepackage[unicode]{hyperref}
+% \usepackage{algorithm}
+% \usepackage{algorithmicx}
+\makeatletter
+% \renewcommand{\ALG@name}{Thuật toán}
+\makeatother
+\usepackage{algpseudocode}
+\usepackage{amsxtra,amssymb,latexsym,amscd,amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+% \usetikzlibrary{shapes.geometric}
+% \usetikzlibrary{positioning,automata}
+% \usepackage{scrextend}
+% \usepackage{longfbox}
+%Môi trường Lời giải
+%\newtheorem{theorem}{Định lý}[chapter]
+%\newtheorem{definition}{Định nghĩa}[chapter]
+%\newtheorem{example}{Ví dụ}[chapter]
+%\newtheorem{lemma}[theorem]{Bổ đề}
+%Tiêu đề
+% \newtheorem{pro}{Bài toán}
+% \newtheorem*{constr}{Ràng buộc}
+% \newtheorem*{calfunc}{Các hàm được thực thi}
+% \newtheorem*{Sol}{Giải thuật}
+% \newtheorem*{Anal}{Phân tích giải thuật}
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \lhead{}
+% \chead{}
+% \rhead{Nguyên lý Hệ Điều Hành}
+% \lfoot{}
+% \cfoot{\thepage}
+% \rfoot{}
+
+\paperheight=24cm
+\paperwidth=17cm
+\textwidth=13truecm
+\textheight=19,7truecm
+\topmargin=0cm
+\headsep=20truept
+\headheight=12pt
+\voffset=-0.75truecm
+\hoffset=-0.75cm
+\oddsidemargin=0.5cm
+\evensidemargin=0.5cm
+\footskip=30 pt
+\pagenumbering {arabic}
+\setcounter{page}{1}
+% \setcounter{chapter}{0}
+\addtocontents{toc}{\protect\vspace{20pt}}
+\setlength{\parindent}{0.5cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+% \renewcommand{\sectionmark}[1]{\markboth{\bfseries Chương \thechapter . \, #1}{}} % Chapter text font settings
+% \renewcommand{\sectionmark}[1]{\markright{\bfseries\thesection\hspace{5pt}#1}{}} % Section text font settings
+\fancyhead[LO,RE]{TMH \#\#\#\#\#}
+\fancyhead[RO,LE]{\textbf{Trang \thepage}}
+
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+
+
+% \renewcommand{\fboxrule}{0.3pt}

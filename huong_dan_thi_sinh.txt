@@ -1,0 +1,72 @@
+CUỘC THI
+TOÁN MÔ HÌNH 2026
+VÒNG 1
+01 – 13 tháng 07, 2026
+HƯỚNG DẪN THÍ SINH
+1 Bố cục, định dạng bài làm 1
+1 Bố cục, định dạng bài làm
+1.1 Định dạng và cách thức nộp bài
+Cách thức nộp bài & thành phần bài nộp
+Sau khi đăng ký dự thi, các đội thi sẽ nhận được một email chứa đề thi. Đội thi có không quá 240
+giờ (10 ngày) tính từ thời điểm nhận được email nói trên để hoàn thành bài thi của mình. Hạn cuối
+nộp bài là 23h59 ngày 13 tháng 07 năm 2026 .
+Đội thi trình bày bài làm của mình dưới dạng một báo cáo và gửi cho Ban tổ chức bằng cách upload
+file báo cáo lên trang web của Ban Tổ chức. Trong trường hợp có sử dụng code trong bài thi thì
+cần upload file chứa code và output kết quả.
+Quy định về cách đặt tên file báo cáo:
+• Đối với đội thi bảng A: BẢNG_A_[TÊN ĐỘI THI]_TMH_V1.pdf ;
+• Đối với đội thi bảng B: BẢNG_B_[TÊN ĐỘI THI]_TMH_V1.pdf .
+Ngoài file báo cáo, các file code và file output kết quả cần được đưa vào trong một file .zip và
+upload lên form nộp bài do Ban tổ chức cung cấp. Quy định về cách đặt tên file .zip:
+• Đối với đội thi bảng A: BẢNG_A_[TÊN ĐỘI THI]_TMH_V1.zip ;
+• Đối với đội thi bảng B: BẢNG_B_[TÊN ĐỘI THI]_TMH_V1.zip .
+Định dạng bài thi
+Bài thi cần tuân thủ các quy định về định dạng sau:
+• Độ dài: Không quá 08 trang (không bao gồm trang bìa và tài liệu tham khảo);
+• Cỡ chữ: 12pt;
+• Font chữ: Times New Roman;
+• Định dạng: pdf;
+1.2 Bố cục bài làm
+Bài dự thi yêu cầu tối thiểu những phần sau:
+1. Trang bìa;
+2. Mục lục;
+3. Nội dung chính của bài thi;
+4. Kết quả;
+5. Đánh giá, hướng phát triển (nếu có);
+6. Tài liệu tham khảo.
+Ngoài ra, các đội có thể thêm các phần khác cho phù hợp với bài làm của đội mình.
+Cuộc thi Toán Mô hình 2026
+2 Quy cách trình bày 2
+2 Quy cách trình bày
+Đánh số trang và đánh số đề mục
+• Quy tắc đánh số trang : Đội thi đánh số trang cho báo cáo của mình bằng chữ số Ả-rập, bắt
+đầu từ sau trang bìa chính của báo cáo đến hết. Số trang cần được đặt ở chân trang, căn giữa,
+font chữ Times New Romans.
+• Quy tắc đánh số đề mục : Các đề mục lớn được đánh số bằng các chữ số Ả-rập; các đề mục
+nhỏ hơn được đánh số theo mục lớn. Phụ lục (nếu có) không đánh số mà dùng chữ cái in
+hoa. Ví dụ như sau:
+1. Mục lớn
+1.1. Mục nhỏ
+1.1.1. Mục nhỏ hơn
+Phụ lục A. Phụ lục 1
+Phụ lục B. Phụ lục 2
+Trích dẫn tài liệu tham khảo
+Đối với các trích dẫn từ sách, bài báo,... : Trích dẫn bao gồm các chi tiết sau:
+1. Tên tác giả;
+2. Tiêu đề sách, bài báo,..;
+3. Nơi xuất bản sách;
+4. Nhà xuất bản, hoặc tạp chí xuất bản bài báo;
+5. Năm xuất bản.
+Các thành phần trên ngăn cách bởi dấu phẩy (,). Ví dụ:
+[1] Y .Mamontov and M.Willander,High-dimensional nonlinear diffusion stochastic processes,
+Singapore: World Scientific, 2001.
+Đối với các trích dẫn từ website: Trích dẫn bao gồm các chi tiết sau:
+1. Tên tác giả;
+2. Tên bài viết;
+3. Tên website;
+4. Địa chỉ;
+5. Ngày truy cập.
+Ví dụ trích dẫn website:
+[1] R.A. Fisher, Iris Data Set. https://archive.ics.uci.edu/ml/datasets/iris.1936.
+Để tiện trích dẫn, các thí sinh có thể sử dụng các công cụ hỗ trợ, ví dụ:https://citethisforme.com/.
+Cuộc thi Toán Mô hình 2026
