@@ -9,6 +9,7 @@ from solver.feature_extractor import FeatureExtractor
 from solver.normalizer import Normalizer
 from solver.score_calculator import ScoreCalculator
 from optimizer.local_search import LocalSearch
+from optimizer.repair_operator import RepairOperator
 
 class GreedySolver:
     def __init__(self, problem: Problem):
@@ -61,6 +62,10 @@ class GreedySolver:
             if day < self.problem.max_days:
                 state.advance_day()
 
+        if use_local_search:
+            repair = RepairOperator(self.problem)
+            repair.run(state)
+
         return state
 
     def _apply_candidate(self, state: State, candidate: Candidate):
@@ -106,7 +111,9 @@ class GreedySolver:
             windows = cust.get_windows_for_day(day)
             valid_window = None
             for w in sorted(windows, key=lambda x: x.start_time):
-                if arrival <= w.end_time:
+                service_start_cand = max(arrival, w.start_time)
+                service_end_cand = service_start_cand + cust.service_duration
+                if service_end_cand <= w.end_time:
                     valid_window = w
                     break
             

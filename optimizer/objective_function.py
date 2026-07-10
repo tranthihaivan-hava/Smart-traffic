@@ -2,7 +2,7 @@ from models.state import State
 from models.problem import Problem
 
 class ObjectiveFunction:
-    def __init__(self, unserved_penalty: float = 10000.0):
+    def __init__(self, unserved_penalty: float = 1000000.0):
         self._penalty = unserved_penalty
 
     def evaluate(self, state: State, problem: Problem) -> float:

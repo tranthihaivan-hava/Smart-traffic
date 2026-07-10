@@ -14,8 +14,8 @@ flowchart TD
     C -->|Suggest weight vector w| D[Greedy Construction\nSolve 7 Days WITHOUT local search]
     D --> E[Objective Function\nEvaluate Loss Score]
     E -->|Return loss to Optuna| C
-    C -->|Best weights found| F[Final Solve\nGreedy + Local Search with best weights]
-    F --> G([📅 Final Weekly Schedule\n298 served / 300 customers])
+    C -->|Best weights found| F[Final Solve\nGreedy + Local Search + Repair with best weights]
+    F --> G([📅 Final Weekly Schedule\n300 served / 300 customers])
 ```
 
 ---
@@ -138,6 +138,15 @@ flowchart TD
 
 All moves are **feasibility-checked** — time windows must still be satisfied after every move.
 
+## 4.5. Ejection Chain Repair Operator (End-of-Line Rescue)
+
+If any customers remain unserved after Greedy + Local Search, a specialized **Ruin and Recreate** repair operator runs:
+
+1. **Force Insertion**: Takes an unserved customer and forcefully inserts it into a valid day, disregarding subsequent window violations.
+2. **Ejection**: Identifies all customers whose time windows are now violated and ejects them from the route.
+3. **Re-insertion**: Attempts to greedily re-insert the ejected customers into other days in the schedule.
+4. **Acceptance**: If all ejected customers find new homes without creating further violations, the entire chain of moves is accepted, successfully serving the previously stuck customer.
+
 ---
 
 ## 5. Bayesian Hyperparameter Optimization (Optuna TPE)
@@ -153,7 +162,7 @@ flowchart TD
     E --> F{Trial 100\ncomplete?}
     F -- No --> B
     F -- Yes --> G[Extract Best Weights]
-    G --> H[Final Solve\nGreedy + Local Search\nwith best weights]
+    G --> H[Final Solve\nGreedy + Local Search + Repair\nwith best weights]
     H --> I([📅 Optimal Weekly Route])
 ```
 
@@ -161,10 +170,10 @@ flowchart TD
 
 | Weight | Value |
 |---|---|
-| `w_distance` | 0.5628 |
-| `w_urgency` | 0.3238 |
-| `w_waiting` | 0.8143 |
-| `w_delivery_risk` | 0.5429 |
+| `w_distance` | 0.6987 |
+| `w_urgency` | 0.5469 |
+| `w_waiting` | 0.9447 |
+| `w_delivery_risk` | 0.8038 |
 
 ---
 
@@ -186,10 +195,11 @@ Loss = (Failed Deliveries × 10,000) + Total Distance (km) + 0.5 × Total Waitin
 
 | Method | Unserved | Loss Score |
 |---|---|---|
-| Nearest Neighbor Baseline | 102 | ~1,020,000+ |
-| Earliest Deadline First | 13 | ~130,000+ |
-| Proposed Heuristic (default weights) | 7 | ~70,000+ |
-| **Proposed Heuristic (Optuna weights)** | **2** | **23,581.48** |
+| Nearest Neighbor Baseline | 115 | ~1,150,000+ |
+| Earliest Deadline First | 15 | ~150,000+ |
+| Proposed Heuristic (default weights) | 22 | ~223,000+ |
+| Proposed Heuristic (Optuna weights) | 2 | 23,565.53 |
+| **Proposed Heuristic + Repair Operator** | **0** | **3,665.82** |
 
 ---
 
@@ -216,10 +226,11 @@ flowchart LR
     subgraph FINAL["Final Solve"]
         D1["GreedySolver\n+ Local Search"]
         D2["3 Operators:\nRelocate · Swap · 2-Opt"]
+        D3["Repair Operator\n(Ejection Chain)"]
     end
 
     subgraph OUTPUT
-        E1["Weekly Schedule\n298 / 300 served"]
+        E1["Weekly Schedule\n300 / 300 served"]
         E2[route_calendar.md]
     end
 
@@ -232,6 +243,7 @@ flowchart LR
     C3 -->|loss| C1
     C1 -->|best w| D1
     D1 <--> D2
-    D1 --> E1
+    D1 --> D3
+    D3 --> E1
     E1 --> E2
 ```

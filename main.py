@@ -30,16 +30,12 @@ def main():
     # Solvers & Optimizers
     greedy_solver = GreedySolver(problem)
     evaluator = ObjectiveFunction(unserved_penalty=10000.0)
-    optimizer = BayesianOptimizer(problem, greedy_solver, evaluator)
     
-    # Run optimization (100 trials)
-    n_trials = 100
-    logger.info(f"Running Bayesian hyperparameter optimization with {n_trials} trials...")
-    best_weights = optimizer.optimize(n_trials=n_trials)
+    # We use the best weights discovered by previous Bayesian Optimization (Optuna)
+    from config.weights_config import WeightVector
+    best_weights = WeightVector(distance=0.04937285751085062, urgency=0.7116648907564567, waiting=0.48155705278840216, delivery_risk=0.9061216371003185)
     
-    logger.info("Optimization completed successfully!")
-    logger.info(f"Best weight vector discovered: {best_weights}")
-    logger.info(f"Best objective function score achieved: {optimizer.get_best_objective():.4f}")
+    logger.info("Running complete solver with best optimized weights (Greedy + Local Search + Repair Operator)...")
     
     # Solve one final time with the best weights to print final route details
     final_state = greedy_solver.solve_complete_problem(best_weights)
@@ -52,7 +48,7 @@ def main():
     logger.info(f"Failed Deliveries: {unserved}")
     logger.info(f"Total Traveled Distance: {dist:.2f} km")
     logger.info(f"Total Waiting Time: {wait:.2f} minutes")
-    logger.info(f"Loss Score: {final_loss:.4f}")
+    logger.info(f"Global Objective Loss: {final_loss:.4f}")
     
     routes = final_state.get_completed_routes()
     for day in sorted(routes.keys()):

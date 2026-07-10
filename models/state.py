@@ -44,6 +44,12 @@ class State:
     def current_route(self) -> List[str]:
         return self._daily_routes[self._current_day]
 
+    def get_route(self, day: int) -> List[str]:
+        return self._daily_routes[day]
+
+    def set_route(self, day: int, route: List[str]) -> None:
+        self._daily_routes[day] = list(route)
+
     def advance_day(self) -> bool:
         if self._current_day >= self._max_days:
             return False

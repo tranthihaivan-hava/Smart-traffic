@@ -17,7 +17,7 @@ class BayesianOptimizer:
         self._evaluator = objective_evaluator
         self._study: Optional[optuna.study.Study] = None
 
-    def optimize(self, n_trials: int = 100) -> WeightVector:
+    def optimize(self, n_trials: int = 500) -> WeightVector:
         # Create a study to minimize the objective loss
         # Use TPE sampler (default for optuna.create_study)
         optuna.logging.set_verbosity(optuna.logging.WARNING)
