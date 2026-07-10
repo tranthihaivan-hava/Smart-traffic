@@ -11,6 +11,7 @@ import numpy as np
 from preprocessing.dataset_loader import DatasetLoader
 from solver.greedy_solver import GreedySolver
 from config.weights_config import WeightVector
+from config.settings import get_settings
 
 # Create visualize directory
 os.makedirs('visualize', exist_ok=True)
@@ -62,6 +63,27 @@ cust_day = {}
 for d, r in routes.items():
     for c in r:
         cust_day[c] = d
+
+def calculate_optimal_start_time(problem, route, day: int) -> float:
+    """Tự động tính giờ xuất phát tối ưu cho mỗi ngày."""
+    if len(route) <= 2:
+        return 480.0
+        
+    first_cust = route[1]
+    tt = problem.get_travel_time("DEPOT", first_cust)
+    cust = problem.get_customer(first_cust)
+    windows = cust.get_windows_for_day(day)
+    
+    valid_window = None
+    for w in sorted(windows, key=lambda x: x.start_time):
+        if max(tt, w.start_time) + cust.service_duration <= w.end_time:
+            valid_window = w
+            break
+            
+    if valid_window:
+        max_depart = valid_window.start_time - tt
+        return max(0.0, (max_depart // 10) * 10)
+    return 0.0
 
 # -------------------------------------------------------------
 # FIG 1 — Route Map
@@ -172,12 +194,19 @@ plt.close()
 # FIG 4 — Shift Timeline
 # -------------------------------------------------------------
 print("Generating Fig 4: Shift Timeline...")
-start_min  = 480   # 08:00
+# Remove global start_min here, we will track minimum start_time across all days
+# to set the plot axis limits appropriately
+shift_starts = {}
+for day in range(1, 8):
+    shift_starts[day] = calculate_optimal_start_time(problem, raw_routes[day], day)
+    
+start_min = min(shift_starts.values()) - 30 # For plotting axis
+
 # Calculate return times based on actual solved state
 return_min = {}
 for day in range(1, 8):
     route = raw_routes[day]
-    current_time = 480.0
+    current_time = shift_starts[day]
     prev_id = "DEPOT"
     for i, cid in enumerate(route):
         if i == 0: continue
@@ -199,7 +228,7 @@ for day in range(1, 8):
         service_start = arrival + wait
         current_time = service_start + cust.service_duration
         prev_id = cid
-    return_min[day] = current_time - 480.0
+    return_min[day] = current_time - shift_starts[day]  # duration of this day's shift
 
 def fmt(m):
     return f'{int(m)//60:02d}:{int(m)%60:02d}'
@@ -209,11 +238,17 @@ ax.set_facecolor('#F8F9FA')
 fig.patch.set_facecolor('#F8F9FA')
 
 for i, day in enumerate(range(1, 8)):
-    ret = start_min + return_min[day]
-    duration = return_min[day]
-    if duration == 0: continue
-    bar = ax.barh(i, duration, left=start_min, color=DAY_COLORS[day], height=0.55, edgecolor='white', linewidth=0.8, zorder=3)
-    ax.text(start_min + duration/2, i, f'{fmt(start_min)} – {fmt(ret)}  ({duration/60:.1f}h)', ha='center', va='center', fontsize=8.5, fontweight='bold', color='white' if duration > 300 else '#333')
+    start_time = shift_starts[day]
+    end_time = start_time + return_min[day]
+    color = DAY_COLORS[day]
+    ax.barh(i, return_min[day], left=start_time, height=0.55, color=color, alpha=0.8, edgecolor='white', zorder=3)
+    
+    # Put text inside the bar to avoid overlap with y-axis labels
+    center_x = start_time + (return_min[day] / 2)
+    duration_h = return_min[day] / 60.0
+    text_color = 'white' if return_min[day] > 180 else '#333333' # Dùng chữ trắng nếu thanh dài, đen nếu thanh quá ngắn
+    ax.text(center_x, i, f'{fmt(start_time)} – {fmt(end_time)} ({duration_h:.1f}h)', 
+            va='center', ha='center', fontsize=9, fontweight='bold', color=text_color)
 
 ax.set_yticks(range(7))
 ax.set_yticklabels([f'{DAY_NAMES[d]}  ({day_counts[d]} cust.)' for d in range(1,8)], fontsize=10)
