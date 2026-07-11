@@ -51,14 +51,16 @@ class State:
         self._daily_routes[day] = list(route)
 
     def advance_day(self) -> bool:
-        if self._current_day >= self._max_days:
-            return False
         # Append DEPOT to finish the current route if it isn't finished yet
         route = self._daily_routes[self._current_day]
         if len(route) > 1 and route[-1] != "DEPOT":
             route.append("DEPOT")
-            # We can calculate travel back to DEPOT if we want to in solver,
-            # but let's make sure it is handled.
+
+        if self._current_day >= self._max_days:
+            return False
+            
+        # We can calculate travel back to DEPOT if we want to in solver,
+        # but let's make sure it is handled.
         self._current_day += 1
         self._current_time = 0.0
         self._current_load = 0.0

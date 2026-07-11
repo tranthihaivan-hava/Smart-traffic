@@ -49,14 +49,13 @@ def calculate_optimal_start_time(problem, route, day: int) -> float:
 def generate_schedule():
     loader = DatasetLoader()
     problem = loader.build_problem_instance("Data_B/locations.csv", "Data_B/time_windows.csv")
-    solver = GreedySolver(problem)
-    
-    weights = WeightVector(distance=0.04937285751085062, urgency=0.7116648907564567, waiting=0.48155705278840216, delivery_risk=0.9061216371003185)
-    state = solver.solve_complete_problem(weights)
-    
-    routes = state.get_completed_routes()
+    import json
+    with open('Overview/presentation_result.txt', 'r') as f:
+        routes_str = json.load(f)
+        
+    routes = {int(k): v for k, v in routes_str.items()}
     lines = []
-    lines.append("# Detailed 300-Customer Delivery Schedule")
+    lines.append("# Detailed 300-Customer Delivery Schedule (HGA + Bayesian)")
     lines.append("=========================================")
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     lines.append("\nĐây là bảng lịch trình chi tiết. Thời gian xuất phát được tự động tối ưu cho từng ngày để giảm thiểu thời gian chờ đợi tại khách hàng đầu tiên.\n")

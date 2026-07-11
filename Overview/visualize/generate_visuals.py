@@ -9,7 +9,7 @@ from matplotlib.colors import to_rgba
 import numpy as np
 
 from preprocessing.dataset_loader import DatasetLoader
-from solver.greedy_solver import GreedySolver
+from solver.genetic_hybrid import GeneticHybridSolver
 from config.weights_config import WeightVector
 from config.settings import get_settings
 
@@ -44,9 +44,8 @@ with open(f'{BASE}/locations.csv', newline='', encoding='utf-8') as f:
 print("Running solver to get actual routes...")
 loader = DatasetLoader()
 problem = loader.build_problem_instance("Data_B/locations.csv", "Data_B/time_windows.csv")
-solver = GreedySolver(problem)
-weights = WeightVector(distance=0.04937285751085062, urgency=0.7116648907564567, waiting=0.48155705278840216, delivery_risk=0.9061216371003185)
-state = solver.solve_complete_problem(weights)
+solver = GeneticHybridSolver(problem, pop_size=20, generations=20)
+state = solver.solve()
 
 raw_routes = state.get_completed_routes()
 routes = {}

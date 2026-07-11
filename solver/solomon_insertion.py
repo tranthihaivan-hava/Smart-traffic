@@ -38,84 +38,18 @@ class SolomonInsertion:
 
 
     def _evaluate_insertion(self, customer: Customer, route: List[str], index: int, state: State, day: int) -> Optional[Candidate]:
-        # Form the proposed new route
-        new_route = list(route)
-        new_route.insert(index, customer.id)
+        from utils.route_validator import RouteValidator
         
-        # Ensure we always end at DEPOT when calculating timeline
-        if new_route[-1] != "DEPOT":
-            new_route.append("DEPOT")
-
-        # Capacity check
-        total_demand = sum(self._problem.get_customer(cid).demand for cid in new_route if cid != "DEPOT")
-        if total_demand > self._problem.vehicle_capacity:
+        metrics = RouteValidator.validate_insertion(self._problem, customer, route, index, day)
+        if metrics is None:
             return None
-
-        # Simulate timeline from start of route
-        current_time = 0.0
-        prev_id = "DEPOT"
-        
-        target_arrival = None
-        target_wait = None
-        target_service_start = None
-
-        for i, cid in enumerate(new_route):
-            if i == 0:
-                continue
             
-            travel_time = self._problem.get_travel_time(prev_id, cid)
-            arrival = current_time + travel_time
-            
-            if cid == "DEPOT":
-                current_time = arrival
-                prev_id = cid
-                continue
-                
-            cust = self._problem.get_customer(cid)
-            windows = cust.get_windows_for_day(day)
-            
-            # Find a valid window we can satisfy
-            # Strict rule: entire service (start + duration) must finish within the window
-            valid_window = None
-            for w in sorted(windows, key=lambda x: x.start_time):
-                service_start_cand = max(arrival, w.start_time)
-                service_end_cand = service_start_cand + cust.service_duration
-                if service_end_cand <= w.end_time:
-                    valid_window = w
-                    break
-            
-            if valid_window is None:
-                # Infeasible
-                return None
-                
-            wait = max(0.0, valid_window.start_time - arrival)
-            service_start = arrival + wait
-            service_end = service_start + cust.service_duration
-            
-            if cid == customer.id and i == index:
-                target_arrival = arrival
-                target_wait = wait
-                target_service_start = service_start
-                
-            current_time = service_end
-            prev_id = cid
-
-        # If we reached here, simulation is feasible!
-        # Calculate distance detour: d_{i,u} + d_{u,j} - d_{i,j}
-        # where i = new_route[index-1], u = customer.id, j = new_route[index+1]
-        i_id = new_route[index - 1]
-        j_id = new_route[index + 1]
-        d_iu = self._problem.get_distance(i_id, customer.id)
-        d_uj = self._problem.get_distance(customer.id, j_id)
-        d_ij = self._problem.get_distance(i_id, j_id)
-        distance_delta = d_iu + d_uj - d_ij
-
         return Candidate(
             customer_id=customer.id,
             day=day,
             insertion_index=index,
-            arrival_time=target_arrival,
-            wait_time=target_wait,
-            service_start_time=target_service_start,
-            distance_delta=distance_delta
+            arrival_time=metrics["arrival_time"],
+            wait_time=metrics["wait_time"],
+            service_start_time=metrics["service_start_time"],
+            distance_delta=metrics["distance_delta"]
         )
