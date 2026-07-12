@@ -1,4 +1,7 @@
-.venv
-.exe
-.ps1
-.cfg
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Môi trường ảo (nếu bạn có tạo venv trước đó)
+venv/
+env/
