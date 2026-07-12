@@ -1,0 +1,380 @@
+% chktex-file 8
+\documentclass[twoside,12pt]{article}
+\usepackage{subfigure}
+\usepackage[utf8]{vietnam}
+% \usepackage[left=2.50cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{fancybox,graphicx}
+\usepackage{mathrsfs}
+\usepackage{lipsum,lineno}
+\usepackage{amsfonts}
+\usepackage{mathptmx}
+\usepackage{fancyhdr}
+\usepackage{longtable,array}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{appendix}
+\usepackage{threeparttable} % For table footnotes
+\usepackage{booktabs}
+\newlength{\mylength}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage[intlimits]{amsmath}
+\usepackage{array}
+\usepackage[unicode]{hyperref}
+% \usepackage{algorithm}
+% \usepackage{algorithmicx}
+\makeatletter
+% \renewcommand{\ALG@name}{Thuật toán}
+\makeatother
+\usepackage{algpseudocode}
+\usepackage{amsxtra,amssymb,latexsym,amscd,amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+% \usetikzlibrary{shapes.geometric}
+% \usetikzlibrary{positioning,automata}
+% \usepackage{scrextend}
+% \usepackage{longfbox}
+%Môi trường Lời giải
+%\newtheorem{theorem}{Định lý}[chapter]
+%\newtheorem{definition}{Định nghĩa}[chapter]
+%\newtheorem{example}{Ví dụ}[chapter]
+%\newtheorem{lemma}[theorem]{Bổ đề}
+%Tiêu đề
+% \newtheorem{pro}{Bài toán}
+% \newtheorem*{constr}{Ràng buộc}
+% \newtheorem*{calfunc}{Các hàm được thực thi}
+% \newtheorem*{Sol}{Giải thuật}
+% \newtheorem*{Anal}{Phân tích giải thuật}
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \lhead{}
+% \chead{}
+% \rhead{Nguyên lý Hệ Điều Hành}
+% \lfoot{}
+% \cfoot{\thepage}
+% \rfoot{}
+
+\paperheight=24cm
+\paperwidth=17cm
+\textwidth=13truecm
+\textheight=19,7truecm
+\topmargin=0cm
+\headsep=20truept
+\headheight=15pt
+\voffset=-0.75truecm
+\hoffset=-0.75cm
+\oddsidemargin=0.5cm
+\evensidemargin=0.5cm
+\footskip=30 pt
+\pagenumbering{arabic}
+\setcounter{page}{1}
+% \setcounter{chapter}{0}
+\addtocontents{toc}{\protect\vspace{20pt}}
+\setlength{\parindent}{0.5cm}
+\raggedbottom
+
+\pagestyle{fancy}
+\fancyhf{}
+% \renewcommand{\sectionmark}[1]{\markboth{\bfseries Chương \thechapter . \, #1}{}} % Chapter text font settings
+% \renewcommand{\sectionmark}[1]{\markright{\bfseries\thesection\hspace{5pt}#1}{}} % Section text font settings
+\fancyhead[LO,RE]{Trident}
+\fancyhead[RO,LE]{\textbf{Trang \thepage}}
+
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+
+
+% \renewcommand{\fboxrule}{0.3pt}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+
+\begin{titlepage}
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{logotmh.png}
+\end{figure}
+\vspace{24pt}
+
+\begin{center}
+	\textbf{{\Huge CUỘC THI}} \\[10pt]
+ \textbf{\LARGE TOÁN MÔ HÌNH 2026}\\[10pt]
+ \textbf{\LARGE VÒNG SƠ KHẢO}\\[10pt]
+ \textbf{ 1 - 13 tháng 7, 2026}
+\\[3.0cm]
+\begin{tabular}{rc}
+Mã đội thi:     & TRIDENT \\
+Ngày thực hiện: & (09/07/26)
+\end{tabular}   
+\end{center}
+
+
+\vspace{\fill}
+\end{titlepage}
+
+\begin{abstract}
+    Báo cáo này tập trung giải quyết bài toán lập lịch trình và định tuyến giao hàng tối ưu cho một phương tiện duy nhất trong khung thời gian một tuần (từ Thứ Hai đến Chủ Nhật). Thách thức lớn nhất của bài toán nằm ở việc xử lý các ràng buộc thực tế phức tạp: giới hạn tốc độ di chuyển 50 $km/h$, danh sách khách hàng lớn, và đặc biệt là hệ thống đa cửa sổ thời gian (Multiple Time Windows) thay đổi liên tục theo từng ngày trong tuần. Khi không thể hoàn thành toàn bộ đơn hàng trong ngày do xung đột thời gian, hệ thống phải tự động đưa ra quyết định trì hoãn (hẹn lại) đơn hàng sang các ngày tiếp theo mà vẫn đảm bảo giao thành công trước cuối tuần. \\
+    Để giải quyết bài toán 
+\end{abstract}
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Giới thiệu}
+Lưu ý tất cả nội dung trong các mục này đều chỉ mang tính minh họa.~\lipsum[4][1-3]
+\subsection{Tổng quan về bệnh ung thư}
+\lipsum[1]\\
+\lipsum[2]
+\subsection{Cơ chế gây bệnh ung thư}
+\lipsum[3]
+\section{Mô hình toán học}
+\subsection{Các giả định}
+\lipsum[2]
+\begin{itemize}
+    \item The penguin is a cylinder.~\lipsum[9][1-3]
+
+    \item Friction is ignored.~\lipsum[3][1-3]
+
+    \item \lipsum[4][1-3]
+
+    \item \lipsum[5][1-3]
+\end{itemize}
+
+\subsection{Xây dựng mô hình}
+Trong hệ thống, quá trình tối ưu hóa Bayes hoạt động như một vòng lặp khép kín, được phân tích qua các thành phần toán học cụ thể sau:
+
+\subsubsection{Giả thiết (Assumptions)}
+Để áp dụng thuật toán Tối ưu hóa Bayes (Bayesian Optimization -- BO) vào việc tinh chỉnh siêu tham số cho hệ thống điều phối giao hàng (VRPTW), mô hình được xây dựng dựa trên các giả thiết toán học sau:
+\begin{itemize}
+    \item \textbf{Tính chất Black-box:} Hàm mục tiêu $f(x)$ đại diện cho tổng chi phí (Loss) của quá trình định tuyến là một hàm hộp đen. Không có biểu thức giải tích tường minh nào liên kết trực tiếp giữa các trọng số đầu vào và kết quả chi phí đầu ra, đồng thời không thể tính được đạo hàm của hàm này (derivative-free).
+    \item \textbf{Chi phí đánh giá cao (Expensive-to-evaluate):} Mỗi lần đánh giá hàm $f(x)$ đòi hỏi phải chạy toàn bộ thuật toán xây tuyến (Solomon/Greedy) và tìm kiếm cục bộ (Local Search) trên tập dữ liệu hàng trăm khách hàng, gây tốn kém lớn về mặt thời gian và tài nguyên tính toán.
+    \item \textbf{Không gian giới hạn:} Các siêu tham số (trọng số của thuật toán Heuristic) nằm trong một không gian tìm kiếm liên tục và bị giới hạn (compact space) $X \subset \mathbb{R}^d$.
+    \item \textbf{Sự tồn tại của nhiễu:} Kết quả trả về của hàm $f(x)$ có thể chứa nhiễu ngẫu nhiên $\epsilon$ do bản chất của các phép toán heuristic nội bộ, tức là quan sát $y=f(x)+\epsilon$, với giả định $\epsilon$ tuân theo phân phối chuẩn $\mathcal{N}(0,\sigma_{noise}^2)$.
+\end{itemize}
+
+\subsubsection{Hướng giải (Solution Direction)}
+Thay vì sử dụng các phương pháp duyệt toàn bộ (Grid Search) hay thử ngẫu nhiên (Random Search) tốn kém và thiếu định hướng, hệ thống giải quyết bài toán tinh chỉnh theo hướng Meta-learning (Học siêu tham số):
+\begin{itemize}
+    \item Sử dụng BO làm ``bộ não'' điều khiển chiến lược vĩ mô. BO không trực tiếp tính toán tuyến đường mà sẽ làm nhiệm vụ đề xuất các cấu hình trọng số $x$ đưa cho thuật toán Heuristic (Solomon) chạy.
+    \item Sử dụng Hồi quy quá trình Gauss (Gaussian Process Regression -- GPR) để thiết lập một mô hình toán học dự đoán (Surrogate Model) mô phỏng lại bề mặt của hàm chi phí thực tế. Tại những điểm chưa thử nghiệm, mô hình sẽ đưa ra cả giá trị trung bình (dự báo chi phí) và phương sai (độ bất định).
+    \item Áp dụng Hàm thu thập (Acquisition Function) để tự động điều hướng việc lấy mẫu, cân bằng giữa hai chiến lược: Khai thác (Exploitation) -- thử nghiệm ở vùng dự đoán có chi phí thấp, và Khám phá (Exploration) -- thử nghiệm ở vùng chưa có dữ liệu để tránh tối ưu cục bộ.
+\end{itemize}
+
+\subsubsection{Bảng API các biến và siêu tham số được gọi trong thuật toán}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.21\textwidth}@{}}
+\toprule
+\textbf{Biến số / Hàm} & \textbf{Kiểu dữ liệu} & \textbf{Ý nghĩa và Vai trò trong mô hình} & \textbf{Ràng buộc / Khoảng giá trị} \\
+\midrule
+\endhead
+$X$ & Matrix / Space & Không gian tìm kiếm chứa tất cả các tổ hợp trọng số khả thi. & Bị giới hạn (Bounded) \\
+$x_t$ & Vector & Véc-tơ siêu tham số đầu vào tại vòng lặp $t$, cấu thành từ các trọng số ưu tiên: $x=(w_{distance},w_{urgency},w_{waiting},w_{risk})$. & $w_i \in X$ hoặc theo định nghĩa user \\
+$f(x)$ & Function & Hàm chi phí ``hộp đen'' (Loss Function) thực thi toàn bộ logic định tuyến. & Chạy toàn bộ pipeline thuật toán \\
+$y_t$ & Float & Giá trị chi phí (Loss) thực tế thu được sau khi chạy thử bộ trọng số $x_t$. $y_t=f(x_t)$. & $y_t>0$ \\
+$D_t$ & Dictionary / Set & Tập dữ liệu lịch sử chứa các cặp cấu hình và kết quả đã quan sát $D_t=\{(x_1,y_1),\dots,(x_t,y_t)\}$. & Cập nhật liên tục \\
+$\mu(x)$ & Float & Giá trị trung bình (Mean) dự đoán bởi quá trình Gaussian Process tại cấu hình $x$. & Đầu ra của GPR \\
+$\sigma^2(x)$ & Float & Phương sai (Variance) / Độ bất định của dự đoán tại $x$. $\sigma$ càng cao, độ bất định càng lớn. & Đầu ra của GPR \\
+$k(x,x')$ & Function & Hàm hạt nhân hiệp phương sai (Kernel) đo lường sự tương quan giữa các điểm dữ liệu (VD: Matérn 5/2). & Định nghĩa độ mượt của hàm \\
+$\alpha_{EI}(x)$ & Function & Hàm thu thập Expected Improvement (Kỳ vọng Cải thiện), quyết định điểm lấy mẫu tiếp theo. & $\alpha(x)\ge 0$ \\
+$y^+$ & Float & Giá trị chi phí (Loss) nhỏ nhất (tốt nhất) đã từng được ghi nhận trong lịch sử tính đến thời điểm hiện tại. & $y^+=\min(y)$ \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsubsection{Mô hình xấp xỉ xác suất tiên nghiệm (Gaussian Process Surrogate Model)}
+Tại mỗi vòng lặp $t$, dựa trên tập dữ liệu lịch sử $D_t$, thuật toán BO thiết lập một phân phối hậu nghiệm xác suất cho bất kỳ cấu hình trọng số $x$ mới nào thông qua Hồi quy Quá trình Gauss (GPR). GPR coi hàm $f(x)$ là một hiện thực của quá trình phân phối Gauss đa chiều:
+\begin{align}\label{eq:gpr-surrogate-model}
+    f(x) \mid D_{1:t} \sim \mathcal{N}(\mu_t(x), \sigma_t^2(x)).
+\end{align}
+Thành phần $\mu_t(x)$ là ước lượng kỳ vọng về giá trị Loss của thuật toán nếu áp dụng bộ trọng số $x$.
+
+Thành phần $\sigma_t(x)$ đo lường rủi ro (độ bất định) của mô hình. Những vùng không gian chưa từng được thuật toán thử nghiệm sẽ có giá trị $\sigma_t(x)$ rất cao. Để phản ánh đúng bề mặt gồ ghề và có thể chứa nhiễu của hàm chi phí VRPTW, hàm hạt nhân (Kernel) Matérn 5/2 kết hợp với một mức nhiễu $\sigma_{noise}^2$ thường được sử dụng nhằm định hình ma trận hiệp phương sai.
+
+\subsubsection{Cơ chế ra quyết định với Hàm thu thập (Acquisition Function)}
+Dựa trên phân phối của GPR, thuật toán phải quyết định điểm $x_{t+1}$ nào cần được giải mã để truyền xuống cho bộ giải Heuristic. Hệ thống sử dụng tiêu chuẩn Kỳ vọng Cải thiện (Expected Improvement -- EI) làm hàm thu thập. Hàm EI tính toán lượng cải thiện kỳ vọng nếu ta đánh giá tại $x$, so với kỷ lục tốt nhất $y^+$ hiện có:
+\begin{align}\label{eq:expected-improvement-model}
+    \alpha_{EI}(x) = (\mu_t(x)-y^+)\Phi\left(\frac{\mu_t(x)-y^+}{\sigma_t(x)}\right) + \sigma_t(x)\phi\left(\frac{\mu_t(x)-y^+}{\sigma_t(x)}\right).
+\end{align}
+Trong công thức này:
+\begin{itemize}
+    \item Đại lượng thứ nhất đại diện cho sự Khai thác (Exploitation), hướng thuật toán vào các vùng có $\mu_t(x)$ thấp.
+    \item Đại lượng thứ hai đại diện cho sự Khám phá (Exploration), hướng thuật toán vào các vùng có $\sigma_t(x)$ cao.
+    \item $\Phi(\cdot)$ và $\phi(\cdot)$ là hàm phân phối tích lũy và hàm mật độ xác suất của phân phối chuẩn.
+\end{itemize}
+
+Điểm tiếp theo $x_{t+1}$ được chọn bằng cách giải bài toán cực đại hóa trên hàm thu thập:
+\begin{align}\label{eq:next-sample-model}
+    x_{t+1} = \arg\max \alpha_{EI}(x).
+\end{align}
+Do $\alpha_{EI}(x)$ là một biểu thức có sẵn trên mô hình toán học (không cần chạy lại thuật toán Heuristic), việc tìm điểm cực đại diễn ra cực kỳ nhanh chóng.
+
+\section{Kết quả và mô phỏng}
+Trong phần này, các kết quả thực nghiệm từ hệ thống Two-Phase BOMA (Bayesian-Optimized Memetic Algorithm) được trình bày. Nghiên cứu tiến hành đánh giá hiệu năng thuật toán, mô phỏng quá trình điều độ và biểu diễn cấu trúc không gian của mạng lưới di chuyển.
+
+\subsection{Đánh giá hiệu năng và so sánh tương quan}
+Để làm rõ tính ưu việt của kiến trúc tối ưu lai, nghiên cứu tiến hành đánh giá chuẩn (Benchmark) giữa hai thuật toán cơ sở (Baseline 1: Nearest Neighbor - NN, Baseline 2: Earliest Deadline First - EDF) và kiến trúc BOMA (tích hợp HGA và toán tử khôi phục cục bộ).
+
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Image/fig_compare_failed_orders.png}
+        \caption{So sánh lượng đơn hàng thất bại}
+        \label{fig:compare-failed}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Image/fig_compare_total_distance.png}
+        \caption{So sánh tổng quãng đường (Routing Cost)}
+        \label{fig:compare-distance}
+    \end{minipage}
+\end{figure}
+
+Kết quả phân tích (Hình \ref{fig:compare-failed} và \ref{fig:compare-distance}) cho thấy sự chênh lệch có ý nghĩa thống kê ở hai chỉ số cốt lõi:
+\begin{itemize}
+    \item \textbf{Khả năng phục vụ (Service Rate):} Khác với các thuật toán cơ sở (NN và EDF) bị rớt lại lượng lớn đơn hàng do các quyết định lựa chọn thiển cận tại mỗi bước lặp, mô hình BOMA đạt tỷ lệ phục vụ tuyệt đối 300/300 (0 đơn thất bại). Thành tựu này đạt được nhờ cơ chế lai ghép (Crossover) và đột biến (Mutation) giúp hệ thống thoát khỏi các cực tiểu cục bộ (Local Optima), kết hợp cùng toán tử khôi phục (Repair Operator) để tinh chỉnh các biên độ sai số.
+    \item \textbf{Chi phí lộ trình (Routing Cost):} Mặc dù phục vụ khối lượng khách hàng lớn hơn hẳn (100\% tập dữ liệu), BOMA vẫn khống chế tổng quãng đường di chuyển ở mức tối thiểu và vượt trội hoàn toàn so với Baseline 2. Điều này minh chứng cho tính hội tụ mạnh mẽ của quá trình định tuyến dưới sự điều hướng của trọng số tối ưu Bayes.
+\end{itemize}
+
+\subsection{Phân phối tải trọng và tối ưu hóa không gian thời gian}
+Sự phân bổ khối lượng công việc hợp lý theo chuỗi thời gian là điều kiện tiên quyết để đảm bảo tính khả thi khi vận hành thực tiễn.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Image/fig_daily_customers.png}
+        \caption{Phân phối tần suất khách hàng theo phổ thời gian}
+        \label{fig:daily-customers}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Image/fig_customer_distribution.png}
+        \caption{Tỷ lệ phục vụ tích lũy}
+        \label{fig:customer-distribution}
+    \end{minipage}
+\end{figure}
+
+Như được thể hiện qua Hình \ref{fig:daily-customers}, thuật toán bộc lộ khả năng phân cụm (Clustering) đa chiều xuất sắc. Mô hình tự động tái cấu trúc lịch trình, dồn tải trọng về các ngày cuối tuần để tối ưu hóa sự phân mảnh của các cửa sổ thời gian (Time Windows) hẹp. Đồng thời, Hình \ref{fig:customer-distribution} khẳng định hệ thống duy trì được tính toàn vẹn của ràng buộc bài toán (Hard Constraints).
+
+\subsection{Mô phỏng và điều độ ca làm việc thực tế}
+Để đánh giá tính ứng dụng, nghiên cứu thực hiện mô phỏng lịch trình làm việc vi mô của người điều phối.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Image/fig_shift_timeline.png}
+    \caption{Biểu đồ Gantt mô phỏng tiến trình ca làm việc (Shift Timeline)}
+    \label{fig:shift-timeline}
+\end{figure}
+
+Dữ liệu mô phỏng từ Hình \ref{fig:shift-timeline} chỉ ra một đặc tính tối ưu học sâu: \textbf{Tính năng điều độ linh hoạt (Dynamic Shift Start)}. Mô hình tự động khởi tạo thời gian xuất bến trễ (ví dụ: 07:00 AM - 09:00 AM) nhằm triệt tiêu hàm thời gian chờ (Waiting Time penalty) tại kho trung tâm (Depot), đồng thời vẫn bảo đảm tính giáp mí hoàn hảo với thời điểm mở cửa của khách hàng đầu tiên trong chuỗi cung ứng.
+
+\subsection{Cấu trúc topo của mạng lưới định tuyến}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Image/fig_route_map_network.png}
+    \caption{Trực quan hóa cấu trúc topo của mạng lưới định tuyến (Spatial Route Network)}
+    \label{fig:route-map}
+\end{figure}
+
+Cấu trúc không gian của mạng lưới (Hình \ref{fig:route-map}) bao hàm 300 đỉnh đồ thị (Nodes) liên kết chặt chẽ quanh tâm Depot. Kết quả tạo thành cấu trúc "cánh hoa" (Petal-shaped routes) -- một dạng hình thái hình học minh chứng cho tính tối ưu nội tại và độ hội tụ cực đại của quá trình định tuyến không gian.
+
+\section{Kết luận}
+\subsection{Ưu điểm của mô hình}
+Qua quá trình thực nghiệm và đánh giá hệ thống Two-Phase BOMA, nghiên cứu rút ra những ưu điểm học thuật cốt lõi sau đây:
+
+\begin{enumerate}
+    \item \textbf{Phân rã kiến trúc tối ưu (Decoupled Optimization Architecture):} Việc cô lập không gian siêu tham số (Hyperparameter space) cho Optuna xử lý vòng ngoài (Outer Loop) đã giảm thiểu đáng kể gánh nặng tính toán cho HGA ở vòng trong (Inner Loop). Khảo hướng này giúp hệ thống đạt tốc độ hội tụ vượt trội so với các thuật toán đồng bộ truyền thống.
+
+    \item \textbf{Toán tử khôi phục cục bộ (Local Search Repair Operator):} Sự kết hợp bất đối xứng giữa thuật toán tiến hóa (giải quyết 98\% cấu trúc đường đi) và thuật toán tìm kiếm cục bộ (giải quyết 2\% dư chấn sai số) là một đóng góp quan trọng. Nó tối đa hóa năng lực "Khám phá toàn cục" (Exploration) đồng thời không đánh đổi thời gian chạy của pha "Khai thác cục bộ" (Exploitation).
+
+    \item \textbf{Phát hiện về cân bằng tối ưu (Trade-off Insight):} Phân tích độ nhạy Bayes chỉ ra rằng thuật toán chủ động gán trọng số suy biến cho biến thời gian chờ ($w = 0.042$) và tối đa hóa trọng số khoảng cách ($w = 0.887$). Đây là một quyết định điều phối thông minh: mô hình chấp nhận biên độ chờ đợi lớn tại các Node giao hàng nhằm duy trì cấu trúc không gian tối thiểu, qua đó tối ưu hóa hàm chi phí nhiên liệu.
+\end{enumerate}
+
+\subsection{Nhược điểm của mô hình}
+Mặc dù đạt được tính hội tụ cao, mô hình BOMA hiện hành vẫn tồn tại một số hạn chế mang tính cấu trúc:
+
+\begin{enumerate}
+    \item \textbf{Hiện tượng quá khớp dữ liệu (Data Overfitting):} Không gian vector trọng số tối ưu được tinh chỉnh nội sinh dựa trên đặc tính của bộ dữ liệu Data\_B. Sự phụ thuộc này làm giảm tính khái quát hóa (Generalization) khi áp dụng mô hình lên một cấu trúc không gian-thời gian của thành phố khác, đòi hỏi hệ thống phải tái khởi động vòng lặp học Bayes (Phase 1).
+
+    \item \textbf{Giới hạn ở không gian tải trọng đồng nhất (Homogeneous Capacity):} Thuật toán hiện đang nới lỏng giả định về sức chứa phương tiện, tập trung hoàn toàn vào tối ưu hóa cửa sổ thời gian (Time Windows). Việc bỏ qua giới hạn nghiêm ngặt về đa dạng tải trọng làm giảm đi độ linh hoạt của mô hình trong môi trường logistics thực tế.
+\end{enumerate}
+
+\subsection{Hướng phát triển mô hình}
+Dựa trên các hạn chế đã phân tích, những hướng nghiên cứu tiềm năng trong tương lai bao gồm:
+
+\begin{enumerate}
+    \item \textbf{Tích hợp bài toán đa phương tiện (Heterogeneous CVRP):} Mở rộng hàm mục tiêu để bao hàm các ràng buộc về sức chứa phương tiện (Capacity) đa dạng, cho phép điều độ đồng thời nhiều loại xe tải khác nhau trong cùng một phổ thời gian.
+
+    \item \textbf{Cơ chế trọng số động (Dynamic Weight Adaptation):} Thay thế vector trọng số tĩnh bằng mạng nơ-ron học sâu (Deep Reinforcement Learning) để tự động điều chỉnh siêu tham số theo từng thế hệ tiến hóa, xóa bỏ hoàn toàn sự phụ thuộc vào quá trình tiền huấn luyện (Pre-training) của Optuna.
+\end{enumerate}
+
+\newpage
+\thispagestyle{empty}
+\begin{thebibliography}{99}
+\bibitem{1} D.~E. KNUTH   The \TeX{}book  the American
+Mathematical Society and Addison-Wesley
+Publishing Company, 1984-1986.
+\bibitem{2}Lamport, Leslie,  \LaTeX{}: `` A Document Preparation System '',
+Addison-Wesley Publishing Company, 1986.
+\bibitem{3}\url{https://www.latexstudio.net/}
+\end{thebibliography}
+\newpage
+
+\begin{appendices}
+    \section{First appendix}
+
+In addition, your report must include a letter to the Chief Financial Officer (CFO) of the Goodgrant Foundation, Mr.~Alpha Chiang, that describes the optimal investment strategy, your modeling approach and major results, and a brief discussion of your proposed concept of a return-on-investment (ROI). This letter should be no more than two pages in length.
+
+Dear, Mr.~Alpha Chiang
+
+\lipsum[1-2]
+
+\vspace{\parskip}
+
+Sincerely yours,
+
+Your friends
+\end{appendices}
+
+
+
+
+
+\end{document}
+
+
+

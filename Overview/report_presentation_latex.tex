@@ -1,0 +1,91 @@
+\chapter{Kết quả Thực nghiệm \& Mô phỏng}
+\label{chap:ket-qua}
+
+Trong chương này, chúng tôi trình bày các kết quả thực nghiệm đạt được từ hệ thống Two-Phase BOMA (Bayesian-Optimized Memetic Algorithm), bao gồm so sánh hiệu năng thuật toán, mô phỏng lịch trình làm việc thực tế và biểu diễn không gian mạng lưới di chuyển.
+
+\section{So sánh Hiệu năng Thuật toán}
+\label{sec:so-sanh-thuat-toan}
+
+Để chứng minh tính vượt trội của kiến trúc tối ưu lai, chúng tôi tiến hành đánh giá chuẩn (Benchmark) giữa Thuật toán Tham lam (Greedy Solver) và BOMA (kết hợp HGA và Cứu hộ Local Search).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{visualize/Final/fig_method_comparison.png}
+    \caption{Biểu đồ so sánh hiệu năng giữa Greedy Solver và BOMA-HGA}
+    \label{fig:method-comparison}
+\end{figure}
+
+Hình \ref{fig:method-comparison} cho thấy sự khác biệt rõ rệt ở hai thông số lõi:
+\begin{itemize}
+    \item \textbf{Tỷ lệ phục vụ (Served Customers):} BOMA đạt mức tuyệt đối 300/300 đơn hàng nhờ khả năng vượt qua cực tiểu cục bộ của HGA kết hợp cơ chế Repair Operator ở pha cuối. Ngược lại, thuật toán Greedy cơ bản bị rớt lại lượng lớn đơn hàng do tính toán thiển cận.
+    \item \textbf{Tổng quãng đường (Total Distance):} Dù phục vụ toàn bộ 300 khách hàng, BOMA vẫn tối ưu hóa được quãng đường di chuyển ở mức cực thấp, chứng minh sức mạnh của các toán tử tiến hóa (Crossover/Mutation) dưới sự dẫn dắt của Trọng số Bayes.
+\end{itemize}
+Kết luận: Kiến trúc BOMA vượt trội hoàn toàn về cả Tải trọng (Capacity) lẫn Chi phí vận hành (Routing Cost).
+
+\section{Phân bổ Tải trọng theo Ngày}
+\label{sec:phan-bo-tai-trong}
+
+Việc phân bổ khối lượng công việc đồng đều hoặc hợp lý theo các ngày trong tuần là yếu tố tiên quyết để đảm bảo tính khả thi trong thực tế vận hành.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{visualize/Final/fig_daily_customers.png}
+        \caption{Biểu đồ cột phân bổ khách hàng theo ngày}
+        \label{fig:daily-customers}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{visualize/Final/fig_customer_distribution.png}
+        \caption{Tỷ lệ phục vụ thành công 100\%}
+        \label{fig:customer-distribution}
+    \end{minipage}
+\end{figure}
+
+Dựa vào Hình \ref{fig:daily-customers}, thuật toán thể hiện khả năng gom cụm (Clustering) xuất sắc khi sắp xếp lịch giao hàng tăng dần về các ngày cuối tuần để khớp với khung thời gian (Time Windows) rải rác của 300 khách hàng. Tỷ lệ phục vụ 100\% (Hình \ref{fig:customer-distribution}) khẳng định tính toàn vẹn của mô hình giải quyết bài toán.
+
+\section{Mô phỏng Ca làm việc Thực tế (Shift Timeline)}
+\label{sec:mo-phong-ca-lam-viec}
+
+Để đưa toán học vào thực tiễn, hệ thống tự động sinh ra biểu đồ tiến trình làm việc (Gantt chart) của tài xế.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{visualize/Final/fig_shift_timeline.png}
+    \caption{Biểu đồ mô phỏng thời gian ca làm việc (Shift Timeline)}
+    \label{fig:shift-timeline}
+\end{figure}
+
+Điểm thông minh của hệ thống (thể hiện trên Hình \ref{fig:shift-timeline}) là khả năng \textbf{Tối ưu giờ xuất phát (Dynamic Shift Start)}. Hệ thống không bắt buộc tài xế khởi hành lúc 00:00, mà tự động lùi giờ xuất bến (ví dụ 07:00 AM - 09:00 AM) sao cho vừa kịp đến khách hàng đầu tiên lúc mở cửa. Điều này giúp loại bỏ hoàn toàn thời gian chờ vô ích tại Depot.
+
+\section{Trực quan hóa Mạng lưới Di chuyển}
+\label{sec:truc-quan-hoa-mang-luoi}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{visualize/Final/fig_route_map_network.png}
+    \caption{Trực quan hóa mạng lưới quỹ đạo di chuyển (Spatial Route Network)}
+    \label{fig:route-map}
+\end{figure}
+
+Hình \ref{fig:route-map} phác họa độ phức tạp không gian của bài toán với 300 đỉnh (nodes) bao quanh Depot trung tâm. Mạng lưới hình thành cấu trúc "cánh hoa" (Petal-shaped routes) - một dạng hình thái tối ưu kinh điển minh chứng cho tính hội tụ của thuật toán định tuyến.
+
+
+\chapter{Đánh giá Ưu \& Nhược điểm}
+\label{chap:danh-gia}
+
+\section{Ưu điểm Vượt trội}
+\label{sec:uu-diem}
+\begin{enumerate}
+    \item \textbf{Kiến trúc Two-Phase tách bạch:} Việc đưa Optuna ra ngoài làm "Meta-Optimizer" giúp HGA chạy cực kỳ nhẹ nhàng ở vòng trong (Inner Loop) mà không bị tắc nghẽn tính toán.
+    \item \textbf{Chiến thuật Cứu hộ (Repair Operator):} Thay vì bắt HGA tự dò dẫm 100\%, hệ thống để HGA giải quyết 98\% cấu trúc đường đi, và dùng Local Search can thiệp đúng một lần duy nhất vào phút chót để chèn 2\% đơn hàng rớt vào các khe hở hẹp. Đây là sự kết hợp tối ưu giữa "Khám phá toàn cục" và "Khai thác cục bộ".
+    \item \textbf{Phát hiện về Đánh đổi Tối ưu (Trade-off Insight):} Quá trình Bayesian Optimization tìm ra bộ trọng số ưu tiên Distance ($w = 0.887$) thay vì Waiting time ($w = 0.042$). Hệ thống chấp nhận việc tài xế đến sớm và phải chờ đợi tại điểm giao, miễn là không làm tăng tổng số kilomet di chuyển, giúp tiết kiệm chi phí nhiên liệu tối đa.
+\end{enumerate}
+
+\section{Nhược điểm \& Hướng phát triển}
+\label{sec:nhuoc-diem}
+\begin{enumerate}
+    \item \textbf{Overfitting với Dataset (Phụ thuộc dữ liệu):} Bộ trọng số hiện tại được tinh chỉnh chặt chẽ cho cấu trúc không gian và thời gian của bộ dữ liệu Data\_B. Khi áp dụng cho một thành phố có tính chất địa lý khác, hệ thống bắt buộc phải tiêu tốn thời gian chạy lại Phase 1 (Optuna) để tìm bộ trọng số mới.
+    \item \textbf{Giới hạn sức chứa đa phương tiện (Multi-Fleet Capacity):} Hiện tại thuật toán tập trung sâu vào Time Windows và bỏ qua giới hạn sức chứa (Capacity) nghiêm ngặt của từng loại xe. Hướng phát triển tương lai cần tích hợp thêm bài toán CVRP (Capacitated VRP) để phân bổ nhiều xe tải cỡ nhỏ làm việc song song trong cùng một ngày.
+\end{enumerate}
